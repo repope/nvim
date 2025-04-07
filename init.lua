@@ -1,9 +1,13 @@
 --print("hello there, we initin now")
 --print("ahello there, we initin now")
 --print("bhello there, we initin now")
-
 require("config.lazy")
 
+vim.opt.shiftwidth = 4
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.clipboard = "unnamedplus"
+  
 local keymap = vim.keymap.set
 
 keymap("n","<space><space>x", "<cmd>source %<CR>")
@@ -19,3 +23,5 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 
+--tree sitter for funsies
+vim.cmd [[hi @function.builtin guifg=yellow]]
