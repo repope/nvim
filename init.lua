@@ -15,6 +15,7 @@ keymap("v", "<space>x", ":.lua<CR>")
 
 keymap("n", "<M-j>", "<cmd>cnext<CR>")
 keymap("n", "<M-k>", "<cmd>cprev<CR>")
+keymap('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Show diagnostics' })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = "Highlight when yanking (copying) text",
