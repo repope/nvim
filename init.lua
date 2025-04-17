@@ -13,6 +13,9 @@ keymap("n", "<space><space>x", "<cmd>source %<CR>")
 keymap("n", "<space>x", ":.lua<CR>")
 keymap("v", "<space>x", ":.lua<CR>")
 
+keymap("n", "<M-j>", "<cmd>cnext<CR>")
+keymap("n", "<M-k>", "<cmd>cprev<CR>")
+
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = "Highlight when yanking (copying) text",
   group = vim.api.nvim_create_augroup('hmmm', { clear = true }),
