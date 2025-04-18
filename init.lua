@@ -16,6 +16,7 @@ keymap("n", "<M-j>", "<cmd>cnext<CR>")
 keymap("n", "<M-k>", "<cmd>cprev<CR>")
 keymap('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Show diagnostics' })
 keymap("n", "-", "<cmd>Oil<CR>")
+keymap("n", "<leader>tt", "<cmd>Floaterminal<CR>")
 
 --- highlight yanked text ---
 vim.api.nvim_create_autocmd('TextYankPost', {
