@@ -15,7 +15,16 @@ return {
       }
     },
     config = function()
+      --local capabilities = require("blink.cmp").get_lsp_capabilities()
+      --require("lspconfig").lua_ls.setup { capabilities = capabilities }
       require("lspconfig").lua_ls.setup {}
+
+      --show floating diagnatics and the sign
+      vim.diagnostic.config({
+        virtual_text = true,
+        signs = true, -- To disable the signs in the sign column
+      })
+
 
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('my.lsp', {}),

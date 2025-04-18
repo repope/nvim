@@ -26,6 +26,13 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end
 })
 
+
+--vim.diagnostic.config({
+--  virtual_text = true,
+--  signs = false, -- To disable the signs in the sign column
+--})
+
+
 --- terminal ---
 vim.api.nvim_create_autocmd('TermOpen', {
   group = vim.api.nvim_create_augroup('custom-term-open', { clear = true }),
@@ -49,6 +56,7 @@ vim.keymap.set("n", "<space>example", function()
   --vim.cmd("normal G")
 end)
 
+--vim.api.nvim_buf_attac
 
 
 --tree sitter for funsies
