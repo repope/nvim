@@ -18,7 +18,7 @@ local function create_floating_window(opts)
 
   -- Create a buffer
   local buf = nil
-  if vim.api.nvim_buf_is_valid(opts.buf) then
+  if opts.buf and vim.api.nvim_buf_is_valid(opts.buf) then
     buf = opts.buf
   else
     buf = vim.api.nvim_create_buf(false, true) -- No file, scratch buffer
@@ -55,3 +55,9 @@ end
 -- Example usage:
 -- Create a floating window with default dimensions
 vim.api.nvim_create_user_command("Floaterminal", toggle_terminal, {})
+
+
+--checking things
+
+--state.floating = create_floating_window()
+--print(vim.inspect(state.floating))
