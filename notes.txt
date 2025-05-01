@@ -1,0 +1,5 @@
+extra things needed:
+* tree-sitter if wanting to auto_install (in setup options) tree-sitter parsers
+
+macos
+* brew install tree-sitter (currently not using auto_install)
