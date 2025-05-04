@@ -1,11 +1,11 @@
 return {
   "rebelot/kanagawa.nvim",
   build = function()
-    print("hello.......")
+    -- print("hello.......")
     vim.cmd("KanagawaCompile")
   end,
   init = function()
-    print("init colorschema")
+    -- print("init colorschema")
     vim.cmd("colorscheme kanagawa")
   end,
   opts = {

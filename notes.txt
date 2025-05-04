@@ -1,5 +1,9 @@
 extra things needed:
 * tree-sitter if wanting to auto_install (in setup options) tree-sitter parsers
+* fzf for fzflua.lua
+* ripgrep (rg) for grep/live_grep for fzflua.lua
 
 macos
 * brew install tree-sitter (currently not using auto_install)
+* brew install fzf
+* brew install rg
