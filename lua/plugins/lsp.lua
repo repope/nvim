@@ -157,6 +157,19 @@ return {
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
           end, "[T]oggle Inlay [H]ints")
         end
+
+        if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_codelens, event.buf) then
+          map("<leader>tc", function()
+            vim.m = vim.m or {}
+            if not vim.m.codelens then
+              vim.lsp.codelens.refresh() --(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
+              vim.m.codelens = true
+            else
+              vim.lsp.codelens.clear()
+              vim.m.codelens = false
+            end
+          end, "[T]oggle [C]odelens")
+        end
       end,
     })
 

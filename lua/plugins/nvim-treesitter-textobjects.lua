@@ -1,6 +1,6 @@
 return {
   "nvim-treesitter/nvim-treesitter-textobjects",
-  dependencies = { 
+  dependencies = {
     "nvim-treesitter/nvim-treesitter",
   },
   init = function()
@@ -18,10 +18,12 @@ return {
             -- You can use the capture groups defined in textobjects.scm
             ["af"] = "@function.outer",
             ["if"] = "@function.inner",
-            ["ac"] = "@class.outer",
+            -- ["ac"] = "@class.outer",
             -- You can optionally set descriptions to the mappings (used in the desc parameter of
             -- nvim_buf_set_keymap) which plugins like which-key display
-            ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+            -- ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+            ["ac"] = { query = "@conditional.outer", desc = "Select outer part of a conditional" },
+            ["ic"] = { query = "@conditional.inner", desc = "Select inner part of a conditional" },
             -- You can also use captures from other query groups like `locals.scm`
             ["as"] = { query = "@local.scope", query_group = "locals", desc = "Select language scope" },
             ["an"] = "@constructor.outer",
@@ -34,9 +36,9 @@ return {
           -- and should return the mode ('v', 'V', or '<c-v>') or a table
           -- mapping query_strings to modes.
           selection_modes = {
-            ['@parameter.outer'] = 'v', -- charwise
-            ['@function.outer'] = 'V', -- linewise
-            ['@class.outer'] = '<c-v>', -- blockwise
+            ["@parameter.outer"] = "v", -- charwise
+            ["@function.outer"] = "V", -- linewise
+            ["@class.outer"] = "<c-v>", -- blockwise
           },
           -- If you set this to `true` (default is `false`) then any textobject is
           -- extended to include preceding or succeeding whitespace. Succeeding
@@ -100,8 +102,6 @@ return {
           -- }
         },
       },
-
     })
-
-  end
+  end,
 }
