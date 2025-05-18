@@ -230,7 +230,8 @@ return {
         roslyn = {
           cmd = {
             'dotnet',
-            '/Users/scott/.local/share/nvim/mason/packages/roslyn/libexec/Microsoft.CodeAnalysis.LanguageServer.dll',
+            vim.fn.stdpath 'data' .. '/mason/packages/roslyn/libexec/Microsoft.CodeAnalysis.LanguageServer.dll',
+            -- '/Users/scott/.local/share/nvim/mason/packages/roslyn/libexec/Microsoft.CodeAnalysis.LanguageServer.dll',
             '--logLevel=Information',
             '--extensionLogDirectory=' .. vim.fs.dirname(vim.lsp.get_log_path()),
             '--stdio',
@@ -268,6 +269,7 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'netcoredbg',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

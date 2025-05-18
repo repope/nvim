@@ -1,3 +1,16 @@
+vim.opt.expandtab = true
+-- amount to indent with << and >>
+vim.opt.shiftwidth = 4
+-- how many spaces are shown per tab
+vim.opt.tabstop = 4
+-- how many spaces are applied when pressing tab
+vim.opt.softtabstop = 4
+
+vim.opt.smarttab = true
+vim.opt.smartindent = true
+-- keep indentation from previous line
+vim.opt.autoindent = true
+
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
@@ -57,8 +70,8 @@ vim.o.splitbelow = true
 --  It is very similar to `vim.o` but offers an interface for conveniently interacting with tables.
 --   See `:help lua-options`
 --   and `:help lua-options-guide`
-vim.o.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+-- vim.o.list = true
+-- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 vim.o.inccommand = 'split'
