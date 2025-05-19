@@ -38,3 +38,6 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
 vim.keymap.set('n', '-', '<cmd>Oil --float<CR>', { desc = 'Open Parent Directory in Oil' })
+vim.keymap.set('n', 'gl', function()
+  vim.diagnostic.open_float()
+end, { desc = 'Open diagnostics in float' })
