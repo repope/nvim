@@ -7,7 +7,11 @@ return {
   },
   config = function()
     require('go').setup()
-    vim.keymap.set('n', '<leader>rt', '<cmd>GoTestFile<CR>', { desc = '[R]un Go [T]est' })
+    vim.keymap.set('n', '<leader>rt', function()
+      vim.cmd 'wa'
+      vim.cmd 'GoTestFile'
+    end, { desc = '[R]un Go [T]est' })
+    -- vim.keymap.set('n', '<leader>rt', '<cmd>GoTestFile<CR>', { desc = '[R]un Go [T]est' })
   end,
   event = { 'CmdlineEnter' },
   ft = { 'go', 'gomod' },

@@ -41,3 +41,4 @@ vim.keymap.set('n', '-', '<cmd>Oil --float<CR>', { desc = 'Open Parent Directory
 vim.keymap.set('n', 'gl', function()
   vim.diagnostic.open_float()
 end, { desc = 'Open diagnostics in float' })
+vim.keymap.set('i', 'jk', '<Esc>', { desc = 'Exit insert mode' })
