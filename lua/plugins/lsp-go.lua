@@ -7,11 +7,24 @@ return {
   },
   config = function()
     require('go').setup()
-    vim.keymap.set('n', '<leader>rt', function()
-      vim.cmd 'wa'
-      vim.cmd 'GoTestFile'
-    end, { desc = '[R]un Go [T]est' })
+    -- vim.keymap.set('n', '<leader>rt', function()
+    --   vim.cmd 'wa'
+    --   vim.cmd 'GoTestFile'
+    -- end, { desc = '[R]un Go [T]est' })
     -- vim.keymap.set('n', '<leader>rt', '<cmd>GoTestFile<CR>', { desc = '[R]un Go [T]est' })
+    vim.api.nvim_create_autocmd('FileType', {
+      group = vim.api.nvim_create_augroup('go', { clear = true }),
+      pattern = { 'go' },
+      callback = function(event)
+        vim.schedule(function()
+          vim.keymap.set('n', '<leader>rt', function()
+            vim.cmd 'wa'
+            vim.cmd 'GoTestFile'
+            -- '<cmd>GoTestFile<CR>'
+          end, { desc = '[R]un Go [T]est' })
+        end)
+      end,
+    })
   end,
   event = { 'CmdlineEnter' },
   ft = { 'go', 'gomod' },

@@ -1,6 +1,6 @@
 return {
   'leoluz/nvim-dap-go',
-  config = true,
+  -- config = true,
   dependencies = {
     'mfussenegger/nvim-dap',
   },
