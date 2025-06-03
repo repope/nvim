@@ -5,25 +5,19 @@ return {
     'neovim/nvim-lspconfig',
     'nvim-treesitter/nvim-treesitter',
   },
-  config = function()
-    require('go').setup()
-    -- vim.keymap.set('n', '<leader>rt', function()
-    --   vim.cmd 'wa'
-    --   vim.cmd 'GoTestFile'
-    -- end, { desc = '[R]un Go [T]est' })
-    -- vim.keymap.set('n', '<leader>rt', '<cmd>GoTestFile<CR>', { desc = '[R]un Go [T]est' })
-    vim.api.nvim_create_autocmd('FileType', {
-      group = vim.api.nvim_create_augroup('go', { clear = true }),
-      pattern = { 'go' },
-      callback = function(event)
-        vim.schedule(function()
-          vim.keymap.set('n', '<leader>rt', function()
-            vim.cmd 'wa'
-            vim.cmd 'GoTestFile'
-            -- '<cmd>GoTestFile<CR>'
-          end, { desc = '[R]un Go [T]est' })
-        end)
+  opts = {
+    -- lsp_keymaps = false,
+    -- other options
+  },
+  config = function(lp, opts)
+    require('go').setup(opts)
+    local format_sync_grp = vim.api.nvim_create_augroup('GoFormat', {})
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      pattern = '*.go',
+      callback = function()
+        require('go.format').goimports()
       end,
+      group = format_sync_grp,
     })
   end,
   event = { 'CmdlineEnter' },
