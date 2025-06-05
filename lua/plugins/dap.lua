@@ -109,6 +109,13 @@ return {
       desc = 'Debug: close repl',
     },
     -- {
+    --   '<leader>dt',
+    --   function()
+    --     require('dap').debug_test()
+    --   end,
+    --   desc = 'Debug testz',
+    -- },
+    -- {
     --   '<leader>tt',
     --   function()
     --     require('dap-go').debug_test()
@@ -134,6 +141,7 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         'delve',
+        'netcoredbg',
       },
     }
 
