@@ -87,6 +87,27 @@ return {
       end,
       desc = 'Debug: See last session result.',
     },
+    {
+      '<leader>dm',
+      function()
+        require('dap').continue()
+      end,
+      desc = 'Debug: current main file',
+    },
+    {
+      '<leader>dro',
+      function()
+        require('dap').repl.open()
+      end,
+      desc = 'Debug: open repl',
+    },
+    {
+      '<leader>drc',
+      function()
+        require('dap').repl.close()
+      end,
+      desc = 'Debug: close repl',
+    },
     -- {
     --   '<leader>tt',
     --   function()

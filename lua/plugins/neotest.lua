@@ -13,5 +13,16 @@ return {
 
     { '<leader>nw', '<cmd>lua require("neotest").watch.toggle(vim.fn.expand("%"))<cr>', desc = 'Watch current file' },
     { '<leader>ns', '<cmd>lua require("neotest").summary.toggle()<cr>', desc = 'Toggle neotest summary' },
+    { '<leader>no', '<cmd>lua require("neotest").output.open({enter = false, auto_close = true})<cr>', desc = 'Neotest output' },
+    { '<leader>nO', '<cmd>lua require("neotest").output_panel.toggle()<cr>', desc = 'Toggle neotest output panel' },
+    {
+      '<leader>na',
+      function()
+        -- local blah = vim.fn.getcwd()
+        -- require('neotest').run.run(blah)
+        require('neotest').run.run { suite = true }
+      end,
+      desc = 'Run all tests',
+    },
   },
 }
