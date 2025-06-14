@@ -97,17 +97,33 @@ return {
     {
       '<leader>dro',
       function()
-        require('dap').repl.open()
+        -- require('dap').repl.open()
+        require('dapui').open { layout = 2 }
       end,
       desc = 'Debug: open repl',
     },
     {
       '<leader>drc',
       function()
-        require('dap').repl.close()
+        -- require('dap').repl.close()
+        require('dapui').close { layout = 2 }
       end,
       desc = 'Debug: close repl',
     },
+    -- {
+    --   '<leader>dco',
+    --   function()
+    --     require('dap').console.open()
+    --   end,
+    --   desc = 'Debug: open console',
+    -- },
+    -- {
+    --   '<leader>dcc',
+    --   function()
+    --     require('dap').console.close()
+    --   end,
+    --   desc = 'Debug: close console',
+    -- },
     -- {
     --   '<leader>dt',
     --   function()
@@ -182,8 +198,8 @@ return {
     end
 
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
-    dap.listeners.before.event_terminated['dapui_config'] = dapui.close
-    dap.listeners.before.event_exited['dapui_config'] = dapui.close
+    -- dap.listeners.before.event_terminated['dapui_config'] = dapui.close
+    -- dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
     -- Install golang specific config
     -- require('dap-go').setup {
@@ -193,6 +209,6 @@ return {
     --     detached = vim.fn.has 'win32' == 0,
     --   },
     -- }
-    require('dap-cs').setup()
+    -- require('dap-cs').setup()
   end,
 }

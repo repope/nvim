@@ -11,20 +11,20 @@ return {
       detached = vim.fn.has 'win32' == 0,
     },
   },
-  -- keys = {
-  --   {
-  --     '<leader>dt',
-  --     function()
-  --       require('dap-go').debug_test()
-  --     end,
-  --     desc = 'Debug test',
-  --   },
-  --   {
-  --     '<leader>dl',
-  --     function()
-  --       require('dap-go').debug_last_test()
-  --     end,
-  --     desc = 'Debug test',
-  --   },
-  -- },
+  keys = {
+    {
+      '<leader>dt',
+      function()
+        require('dap-go').debug_test()
+      end,
+      desc = 'Debug test',
+    },
+    {
+      '<leader>dl',
+      function()
+        require('dap-go').debug_last_test()
+      end,
+      desc = 'Debug test',
+    },
+  },
 }

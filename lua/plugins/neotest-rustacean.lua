@@ -1,6 +1,6 @@
 return {
   'nvim-neotest/neotest',
-  enabled = true,
+  -- enabled = false,
   config = function()
     require('neotest').setup {
       adapters = {
