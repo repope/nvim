@@ -5,6 +5,8 @@ return {
     'nvim-lua/plenary.nvim',
     'antoinemadec/FixCursorHold.nvim',
     'nvim-treesitter/nvim-treesitter',
+    { 'fredrikaverpil/neotest-golang', version = '*' }, -- Installation
+    'Issafalcon/neotest-dotnet',
   },
   keys = {
     { '<leader>nr', '<cmd>lua require("neotest").run.run()<cr>', desc = 'Run nearest test' },
@@ -25,4 +27,17 @@ return {
       desc = 'Run all tests',
     },
   },
+  config = function()
+    local neotest_golang_opts = {} -- Specify custom configuration
+
+    require('neotest').setup {
+      adapters = {
+        require 'rustaceanvim.neotest',
+        require 'neotest-golang'(neotest_golang_opts), -- Registration
+        require 'neotest-dotnet' {
+          discovery_root = 'solution',
+        },
+      },
+    }
+  end,
 }
