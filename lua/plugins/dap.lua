@@ -1,4 +1,3 @@
--- debug.lua
 --
 -- Shows how to use the DAP plugin to debug your code.
 --
@@ -212,5 +211,21 @@ return {
     -- require('dap-cs').setup()
 
     -- local dap = require 'dap'
+
+    -- dap.adapters.coreclr = {
+    --   type = 'executable',
+    --   command = vim.fn.stdpath 'data' .. '/mason/bin/netcoredbg',
+    --   args = { '--interpreter=vscode' },
+    -- }
+    -- dap.configurations.cs = {
+    --   {
+    --     type = 'coreclr',
+    --     name = 'launch - netcoredbg',
+    --     request = 'launch',
+    --     program = function()
+    --       return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/net9.0', 'file')
+    --     end,
+    --   },
+    -- }
   end,
 }

@@ -4,6 +4,8 @@ return { -- Autocompletion
   version = '1.*',
   dependencies = {
     -- Snippet Engine
+    'Kaiser-Yang/blink-cmp-avante',
+    'folke/lazydev.nvim',
     {
       'L3MON4D3/LuaSnip',
       version = '2.*',
@@ -29,7 +31,6 @@ return { -- Autocompletion
       },
       opts = {},
     },
-    'folke/lazydev.nvim',
   },
   --- @module 'blink.cmp'
   --- @type blink.cmp.Config
@@ -76,9 +77,16 @@ return { -- Autocompletion
     },
 
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'lazydev' },
+      default = { 'avante', 'lsp', 'path', 'snippets', 'lazydev', 'buffer' },
       providers = {
         lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+        avante = {
+          module = 'blink-cmp-avante',
+          name = 'Avante',
+          opts = {
+            -- options for blink-cmp-avante
+          },
+        },
       },
     },
 
