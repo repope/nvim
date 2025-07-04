@@ -19,4 +19,9 @@ return {
       vim.cmd.RustLsp 'debug'
     end, { desc = 'Rustacean debug' })
   end,
+  ['rust-analyzer'] = {
+    cargo = {
+      allFeatures = true,
+    },
+  },
 }

@@ -42,3 +42,9 @@ vim.keymap.set('n', 'gl', function()
   vim.diagnostic.open_float()
 end, { desc = 'Open diagnostics in float' })
 vim.keymap.set('i', 'jk', '<Esc>', { desc = 'Exit insert mode' })
+
+vim.keymap.set('n', '<leader>;', function()
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  vim.cmd 'norm A;'
+  vim.api.nvim_win_set_cursor(0, cursor)
+end, { noremap = true, silent = true })
