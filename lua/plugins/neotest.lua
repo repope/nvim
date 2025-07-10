@@ -5,6 +5,7 @@ return {
     'nvim-lua/plenary.nvim',
     'antoinemadec/FixCursorHold.nvim',
     'nvim-treesitter/nvim-treesitter',
+    'lawrence-laz/neotest-zig',
     { 'fredrikaverpil/neotest-golang', version = '*' }, -- Installation
     -- 'Issafalcon/neotest-dotnet',
   },
@@ -34,6 +35,12 @@ return {
       adapters = {
         require 'rustaceanvim.neotest',
         require 'neotest-golang'(neotest_golang_opts), -- Registration
+        require 'neotest-zig' {
+          dap = {
+            adapter = 'codelldb',
+          },
+        },
+
         -- require 'neotest-dotnet' {
         --   discovery_root = 'solution',
         -- },

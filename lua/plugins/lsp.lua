@@ -116,6 +116,11 @@ return {
           --  the definition of its *type*, not where it was *defined*.
           map('grt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
 
+          map('gK', function()
+            local new_config = not vim.diagnostic.config().virtual_text
+            vim.diagnostic.config { virtual_text = new_config }
+          end, 'Toggle virtual text')
+
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
           ---@param client vim.lsp.Client
           ---@param method vim.lsp.protocol.Method
@@ -214,9 +219,70 @@ return {
       --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+
+      vim.lsp.config('*', { capabilities = capabilities })
+
+      vim.lsp.config('zls', {
+        cmd = { vim.fn.expand '$HOME/zig/bin/zls' },
+        settings = {
+          zls = {
+            zig_exe_path = vim.fn.expand '$HOME/zig/bin/zig',
+            semantic_tokens = 'partial',
+            enable_inlay_hints = true,
+            enable_snippets = true,
+            warn_style = true,
+            enable_build_on_save = true,
+          },
+        },
+      })
+
       local servers = {
         -- clangd = {},
         gopls = {},
+        zls = {},
+        roslyn = {},
+        lua_ls = {},
+
+        -- zls = {
+        --   cmd = { '/home/scott/zig/bin/zls' },
+        --   frank = 'hi',
+        --   commands = { '/home/scott/zig/bin/zls' },
+        --   filetypes = { '.blah' },
+        --   settings = {
+        --     zls = {
+        --       zig_exe_path = 'home/scott/zig/bin/zig',
+        --       semantic_tokens = 'partial',
+        --       enable_inlay_hints = true,
+        --       enable_snippets = true,
+        --       warn_style = true,
+        --       enable_build_on_save = true,
+        --     },
+        --   },
+        -- },
+
+        -- zls = function()
+        --   print 'weeeeeeeeeeeeee'
+        --   local lspconfig = require 'lspconfig'
+        --   lspconfig.zls.setup {
+        --     print 'weeeeeeeeeeeeee',
+        --     cmd = { '~/zig/bin/zls' },
+        --     root_dir = lspconfig.util.root_pattern('.git', 'build.zig', 'zls.json'),
+        --     settings = {
+        --       zls = {
+        --         zig_exe_path = '~/zig/bin/zig',
+        --         semantic_tokens = 'partial',
+        --         enable_inlay_hints = true,
+        --         enable_snippets = true,
+        --         warn_style = true,
+        --         enable_build_on_save = true,
+        --       },
+        --     },
+        --   }
+        --   -- don't show parse errors in a separate window
+        --   vim.g.zig_fmt_parse_errors = 0
+        --   -- disable format-on-save from `ziglang/zig.vim`
+        --   vim.g.zig_fmt_autosave = 0
+        -- end,
         -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -227,30 +293,31 @@ return {
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
-        roslyn = {
-          cmd = {
-            'dotnet',
-            vim.fn.stdpath 'data' .. '/mason/packages/roslyn/libexec/Microsoft.CodeAnalysis.LanguageServer.dll',
-            -- '/Users/scott/.local/share/nvim/mason/packages/roslyn/libexec/Microsoft.CodeAnalysis.LanguageServer.dll',
-            '--logLevel=Information',
-            '--extensionLogDirectory=' .. vim.fs.dirname(vim.lsp.get_log_path()),
-            '--stdio',
-          },
-        },
-        lua_ls = {
-          -- cmd = { ... },
-          -- filetypes = { ... },
-          -- capabilities = {},
-          settings = {
-            Lua = {
-              completion = {
-                callSnippet = 'Replace',
-              },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
-            },
-          },
-        },
+        -- roslyn = {
+        -- cmd = {
+        --   'dotnet',
+        --   vim.fn.stdpath 'data' .. '/mason/packages/roslyn/libexec/Microsoft.CodeAnalysis.LanguageServer.dll',
+        --   -- '/Users/scott/.local/share/nvim/mason/packages/roslyn/libexec/Microsoft.CodeAnalysis.LanguageServer.dll',
+        --   '--logLevel=Information',
+        --   '--extensionLogDirectory=' .. vim.fs.dirname(vim.lsp.get_log_path()),
+        --   '--stdio',
+        --   '--zstdio',
+        -- },
+        -- },
+        -- lua_ls = {
+        --   -- cmd = { ... },
+        --   -- filetypes = { ... },
+        --   -- capabilities = {},
+        --   settings = {
+        --     Lua = {
+        --       completion = {
+        --         callSnippet = 'Replace',
+        --       },
+        --       -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+        --       -- diagnostics = { disable = { 'missing-fields' } },
+        --     },
+        --   },
+        -- },
       }
 
       -- Ensure the servers and tools above are installed
@@ -274,12 +341,15 @@ return {
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
+      local lspcfg = require 'lspconfig'
       require('mason-lspconfig').setup {
         ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
         automatic_installation = false,
         automatic_enable = true,
+        -- NOTE: this was removed, function never called. just use vim.lsp.config() with lspconfig defaults
         handlers = {
           function(server_name)
+            print 'hello from mason handler'
             local server = servers[server_name] or {}
             -- This handles overriding only values explicitly passed
             -- by the server configuration above. Useful when disabling
